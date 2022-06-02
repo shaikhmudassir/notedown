@@ -1,0 +1,103 @@
+{% for c in content %}
+    {{ c | safe }} <br>
+{% endfor %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module">
+
+  // Import API Manager Library
+  import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
+  async function main()
+  {
+    var M = "shaikhmudassir",R = "test";
+    const octokit = new Octokit({ auth: `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` });
+
+    // Get all the commits, then get sha of latest commit
+    var response = await octokit.request('GET /repos/{owner}/{repo}/commits', {
+    owner: M,
+    repo: R
+    });
+    var commit_sha = response['data'][0]['sha'];
+
+    // Get sha of tree of files
+    var response = await octokit.request('GET /repos/{owner}/{repo}/git/commits/{sha}', {
+    owner: M,
+    repo: R,
+    sha : commit_sha
+    });
+    var tree_sha = response['data']['tree']['sha'];
+
+    // fetch the tree API convert it into JSON
+    var url = "https://api.github.com/repos/shaikhmudassir/test/git/trees/" + tree_sha ; 
+    var response = await fetch(url);
+    var data = await response.json();
+    var file_i = 1;
+    for(var i in data['tree'])
+    {
+      var file = data['tree'][i]['path']; // Get Filename
+      
+      var file_url = "https://shaikhmudassir.github.io/test/" + file ; // Get File URL
+      
+      file_url= file_url.split('.md')[0]; // Remove file extinction
+
+      // If file is not index file (or file has .md extiction) then ..." 
+      if(file != "index.html")
+      {
+        $.get(file_url, function( doc ) {
+            
+          // append it to the div("#notes)
+          var edit_btn = "<button class='btn btn-dark' style='border-radius: 100%;' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='edit("+ (file_i++) +")'></button>";
+          var tmp = "<div class='alert alert-me' role='alert'>" + doc.substring(doc.search("<body>")+6,doc.search("</body>")) + edit_btn + " </div>";        
+          $('#notes').prepend(tmp);
+          
+          // Get tags from Document , add them in Set  and append it to the tags Div(#tags)
+          var tmp = document.getElementsByTagName('code');
+          var tags = [];
+          for(var j=0;j<tmp.length;j++)
+          {
+            var a = tmp[j].innerText;
+            if(a[0] == "@") 
+            {
+              tmp[j].innerText = "@"+cap(a.substr(1));
+              tags[tags.length] = cap(a.substr(1));
+            }
+          }
+          document.getElementById("tags").innerHTML = "<button type='button' class='btn btn-danger tag-btn' onclick=allback() data-bs-dismiss='offcanvas'> All </button> " ;
+          var tags = [...new Set(tags)].sort() 
+          tags.forEach (function(value) {
+            $('#tags').append("<button type='button' class='btn btn-success tag-btn' onclick=filter('" + value + "') data-bs-dismiss='offcanvas'>" + value + "</button> ");
+          })
+        });
+      }
+    }
+
+    $("#upload").click(function(){
+
+      // Get the Text from uploaded file
+      var filetxt ;
+      var fileInput = document.getElementById("fileInput").files[0];
+      var fileReader = new FileReader();
+      fileReader.onload = function(evt){
+      filetxt = evt.target.result;
+        
+      // Initialiaze variable for API
+      var F = data['tree'].length+".md";
+      var msg = data['tree'].length + "_File";
+      var C = filetxt
+
+      // Push the file in repo using API
+      var response =  octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+      owner: M,
+      repo: R,
+      path: F,
+      message: msg,
+      content: btoa(C)
+      });
+    };
+    fileReader.readAsText(fileInput, "UTF-8");
+    });
+  }
+  main();
+</script>  

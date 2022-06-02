@@ -1,0 +1,83 @@
+{% extends "gitdown/layout.html" %}
+
+{% block title %}   noteDown  {% endblock %}
+
+{% block body %}
+    <!-- 
+      * Right Side Canvase
+      * Used to show tags or topics in whole page
+      * NOTNOW
+    -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Topics</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        
+        <div id="tags" >
+          <button class="rounded-pill btn btn-warning" onclick="filter()">All</button>
+          {% for tag in tags %}
+            <button class="rounded-pill btn btn-success" onclick="filter('{{ tag }}')">{{ tag }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!--
+      * Hidden Div Tag
+      * Use whole webpage as a single row
+      * Then divide webpage in two colums
+    -->
+    <div class="row mt-3" style="margin: 2px;"> 
+
+      <!--
+        * Left-Side colum
+        * Used to show actual content
+        * It contain two button, first-> Edit, second-> Delete
+        * "svg" tag is used for Icons 
+      -->
+      <div class="col-lg-10" id="notes">
+        {% for c in content %}
+          <div class='alert alert-me' role='alert'> 
+            <div style="float:right; display: flex;">
+              <form action="{% url 'gitdown:edit' %}">
+                {% csrf_token %}
+                <input type="hidden" name="file_name" value="{{ c.name }}">
+                <button type="submit" class='btn btn-warning CRED-btn' title="Edit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                    <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+                </button>
+              </form>
+              <form action="{% url 'gitdown:delete' %}">
+                {% csrf_token %}
+                <input type="hidden" name="file_name" value="{{ c.name }}">
+                <button type="submit" class='btn btn-danger CRED-btn' title="Delete">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+            <div class="container-lg px-3 my-5 markdown-body">{{ c.data | safe }}</div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!--
+        * Right-Side colum 
+        * Two buttons 'Create New' and 'Logout'
+      -->
+      <div class="col-lg-2">
+        <a href="{% url 'gitdown:new'%}"><button type="button" class="btn btn-outline-dark" id="upload">Create New</button><hr></a>
+        <a href="{% url 'gitdown:logout'%}"><button type="button" class="btn btn-outline-dark" id="upload">Github Logout</button><hr></a>
+      </div>
+      
+      <button onclick="topFunction()" id="goTop" title="Go to top">Top</button>
+      
+    </div>
+
+  {% endblock %}

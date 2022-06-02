@@ -1,0 +1,7 @@
+Django==4.0.4
+Markdown==3.3.7
+markdown2==2.4.3
+PyGithub==1.55
+requests==2.25.1
+sqlparse==0.4.2
+urllib3==1.26.5

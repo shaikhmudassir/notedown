@@ -1,0 +1,33 @@
+{% extends "gitdown/layout.html" %}
+
+{% block title %}   noteDown  {% endblock %}
+
+{% block body %}
+    <!--
+      * Hidden Div Tag
+      * Use whole webpage as a single row
+      * Then divide webpage in two colums
+    -->
+    <form action="{% url 'gitdown:new' %}" method="POST">
+    <div class="row mt-3" style="margin: 2px;"> 
+
+      <!--
+        * Left-Side colum
+        * Used to Write Markdown content
+      -->
+      
+      <div class="col-lg-10" id="notes">
+          {% csrf_token %}
+          <textarea id="TextArea1" name="content"></textarea>
+      </div>
+
+      <!--
+        * Right-Side colum 
+      -->
+      <div class="col-lg-2">
+        <button type="submit" class="btn btn-outline-info" id="upload" value="Save">Save</button><hr>
+        <a href="{% url 'gitdown:index'%}"><button type="button" class="btn btn-outline-danger" id="upload">Cancel</button><hr></a>
+      </div>
+    </div>
+  </form>
+  {% endblock %}
