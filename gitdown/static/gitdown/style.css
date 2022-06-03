@@ -3,7 +3,7 @@ nav>h1{
     color: greenyellow;
     margin: 2px;
 }
-#tags>btn{
+#tags>.btn{
     margin-bottom:2%;
 }
 @media (max-width: 480px){
