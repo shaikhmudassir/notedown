@@ -21,7 +21,7 @@ https://pygithub.readthedocs.io/en/latest/
 '''
 
 def index(request):    
-    # Check token is available or not 
+    # Check token is available or not.If not then redirect to authentication page 
     if "token" not in request.session:
         return HttpResponseRedirect("oauth")
 
@@ -45,7 +45,7 @@ def index(request):
 
     request.session["user_repo_name"] = username + "/" + reponame
 
-    # Get the files of a repository as a object (This not a contain of a file it is complete object with all properties)
+    # Get the files of a repository as a object (This is not just a content of a file it is complete object with all properties)
     files = repo.get_contents("")
 
     # Get the content of a file
@@ -62,7 +62,7 @@ def index(request):
                 
         decoded_content.append({"name" :content_file.path, "data":g.render_markdown(data)})
     return render(request, "gitdown/index.html", {
-        "content" : decoded_content,
+        "content" : decoded_content.reverse(),
         "tags":tags
     })
     
@@ -107,7 +107,7 @@ def new(request):
 
             # For creating new file we required username/repositoryName, filename and commit message
             repo = g.get_repo(request.session["user_repo_name"])
-            filename = datetime.datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
+            filename = datetime.datetime.now().strftime("%Y%m%d_%H_%M_%S") + ".md"
             commit_msg =  filename + " is created"
 
             repo.create_file(filename, commit_msg, content)
