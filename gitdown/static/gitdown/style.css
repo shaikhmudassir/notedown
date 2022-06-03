@@ -3,6 +3,9 @@ nav>h1{
     color: greenyellow;
     margin: 2px;
 }
+#tags>btn{
+    margin-bottom:2%;
+}
 @media (max-width: 480px){
     nav>h1{
         font-size: 22px;
@@ -36,7 +39,7 @@ nav{
     border-radius: 500px;
 }
 #upload{
-    width: 60%;
+    width: 70%;
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 2%;
