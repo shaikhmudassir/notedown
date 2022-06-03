@@ -26,6 +26,9 @@ def index(request):
 =======
 def index(request):    
     # Check token is available or not.If not then redirect to authentication page 
+<<<<<<< HEAD
+>>>>>>> 460c1d2e0d2fe5c8a4f3aee95434dddce6dc8559
+=======
 >>>>>>> 460c1d2e0d2fe5c8a4f3aee95434dddce6dc8559
     if "token" not in request.session:
         return HttpResponseRedirect("oauth")
