@@ -1,7 +1,7 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from github import BadCredentialsException , Github 
+from github import BadCredentialsException , Github
 import requests, datetime
 
 # Form for 'new.html' to write content for creating new file
@@ -20,8 +20,8 @@ https://docs.github.com/en/developers/apps/managing-github-apps/installing-githu
 https://pygithub.readthedocs.io/en/latest/
 '''
 
-def index(request):    
-    # Check token is available or not 
+def index(request):
+    # Check token is available or not
     if "token" not in request.session:
         return HttpResponseRedirect("oauth")
 
@@ -35,8 +35,8 @@ def index(request):
 
     # If repository is not available (means repo is not created yet) then create new repository
     # Note: It will execute only one time while user install the app first time
+    reponame = "notedown-" + username
     try:
-        reponame = "notedown-" + username
         repo = g.get_repo(username + "/" + reponame)
     except:
         user.create_repo(reponame,private=True)
@@ -57,18 +57,18 @@ def index(request):
 
         # Find tags in markdown content and apply text formaring to get proper tags
         for i in data.split():
-            if i.startswith('`@'): 
+            if i.startswith('`@'):
                 tags.add(i[2:-1])
-                
+
         decoded_content.append({"name" :content_file.path, "data":g.render_markdown(data)})
     return render(request, "gitdown/index.html", {
         "content" : decoded_content,
         "tags":tags
     })
-    
+
 
 def oauth(request):
-    # Redirect to github authentication 
+    # Redirect to github authentication
     return HttpResponseRedirect("https://github.com/login/oauth/authorize?client_id=Iv1.36ee32ab30bbb309")
 
 def callback(request):
@@ -84,15 +84,15 @@ def callback(request):
     x = requests.post(url, data = param)
 
     # Extracting gho_*** token from POST request responce
-    request.session["token"] = x.text.split("&")[0].split("=")[1]  
+    request.session["token"] = x.text.split("&")[0].split("=")[1]
     g = Github(request.session["token"])
-    
+
     return HttpResponseRedirect("/")
-    
+
 def new(request):
     if "token" not in request.session:
         return HttpResponseRedirect("oauth")
-        
+
     # If POST request then collect content from textarea to create new file
     if request.method == "POST":
         form = ContentForm(request.POST)
@@ -135,7 +135,7 @@ def edit(request):
             except (BadCredentialsException , KeyError):
                 return HttpResponseRedirect("oauth")
 
-            # Get repository object by using this object get file object (by providing filename) 
+            # Get repository object by using this object get file object (by providing filename)
             repo = g.get_repo(request.session["user_repo_name"])
             contents = repo.get_contents(file_name)
 
@@ -145,7 +145,7 @@ def edit(request):
         # After successfully Updating a file redirect to home page
         return HttpResponseRedirect("/")
 
-    # If it is not a POST request then get the filenaname and continue.. 
+    # If it is not a POST request then get the filenaname and continue..
     file_name = request.GET.get("file_name")
 
     # If token is not set or token is get expired then redirect to '/oauth'
