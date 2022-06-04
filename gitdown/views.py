@@ -42,12 +42,11 @@ def index(request):
     except:
         user.create_repo(reponame,private=True)
         repo = g.get_repo(username + "/" + reponame)
-        with open('/static/gitdown/docs.md') as f:
-            module_dir = os.path.dirname(__file__)  # get current directory
-            print(module_dir)
-            file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
-            print(file_path)
-            docs = file_path.read()
+        
+        module_dir = os.path.dirname(__file__) 
+        file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
+        with open(file_path) as f:
+            docs = f.read()
             print(docs)
             repo.create_file("000docs.md", "Documentation is created", docs)
 
