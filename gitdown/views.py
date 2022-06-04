@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from github import BadCredentialsException , Github
 import requests, datetime
+import os
 
 # Form for 'new.html' to write content for creating new file
 class ContentForm(forms.Form):
@@ -42,7 +43,9 @@ def index(request):
         user.create_repo(reponame,private=True)
         repo = g.get_repo(username + "/" + reponame)
         with open('/static/gitdown/docs.md') as f:
-            docs = f.read()
+            module_dir = os.path.dirname(__file__)  # get current directory
+            file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
+            docs = file_path.read()
             repo.create_file("000docs.md", "Documentation is created", docs)
 
     request.session["user_repo_name"] = username + "/" + reponame
