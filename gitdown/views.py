@@ -44,8 +44,11 @@ def index(request):
         repo = g.get_repo(username + "/" + reponame)
         with open('/static/gitdown/docs.md') as f:
             module_dir = os.path.dirname(__file__)  # get current directory
+            print(module_dir)
             file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
+            print(file_path)
             docs = file_path.read()
+            print(docs)
             repo.create_file("000docs.md", "Documentation is created", docs)
 
     request.session["user_repo_name"] = username + "/" + reponame
