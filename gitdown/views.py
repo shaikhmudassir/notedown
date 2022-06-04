@@ -41,7 +41,9 @@ def index(request):
     except:
         user.create_repo(reponame,private=True)
         repo = g.get_repo(username + "/" + reponame)
-        repo.create_file("000docs.md", "Documentation is created", "# Documentation")
+        with open('/static/gitdown/docs.md') as f:
+            docs = f.read()
+            repo.create_file("000docs.md", "Documentation is created", docs)
 
     request.session["user_repo_name"] = username + "/" + reponame
 
@@ -61,7 +63,6 @@ def index(request):
                 tags.add(i[2:-1])
 
         decoded_content.append({"name" :content_file.path, "data":g.render_markdown(data)})
-        print(decoded_content)
         decoded_content.reverse()
     return render(request, "gitdown/index.html", {
         "content" : decoded_content,
