@@ -1,5 +1,7 @@
 # Documentation
 
+`@Docs` `@Help`
+
 ## Basic Usage
 * Click on **Create New** Button to create new note.
 * Click on **Yellow** Button given in each note to **Edit** that note.
