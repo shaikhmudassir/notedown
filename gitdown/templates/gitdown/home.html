@@ -7,13 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>noteDown</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+	<link href="{% static 'gitdown/gh_pages.css' %}" rel="stylesheet">
+   	<link href="{% static 'gitdown/style.css' %}" rel="stylesheet">
         <link href="{% static 'gitdown/css/styles.css' %}" rel="stylesheet" />
     </head>
     <body>
@@ -43,6 +42,280 @@
                     </p>
 
                     <h1>Getting Started</h1>
+
+
+		<div class="container-lg px-3 my-5 markdown-body"><h1>
+<a id="user-content-documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h1>
+<h2>
+<a id="user-content-basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic Usage</h2>
+<ul>
+<li>Click on <strong>Create New</strong> Button to create new note.</li>
+<li>Click on <strong>Yellow</strong> Button given in each note to <strong>Edit</strong> that note.</li>
+<li>Click on <strong>Red</strong> Button given in each note to <strong>Delete</strong> that note.</li>
+<li>To add <strong>Tag</strong> into your note use the following syntax
+<blockquote>
+<p>`@tag_name`</p>
+<p>(  <strong>`</strong>  ) This is <strong>Grave Accent</strong> symbol not a single quote</p>
+<p>which is located directly below the <strong>Esc</strong> key.</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h1>
+<a id="user-content-markdown-guide" class="anchor" href="#markdown-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Markdown Guide</h1>
+<pre><code>  # h1 Heading
+  ## h2 Heading
+  ### h3 Heading
+  #### h4 Heading
+  ##### h5 Heading
+  ###### h6 Heading
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<h1>
+<a id="user-content-h1-heading" class="anchor" href="#h1-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h1 Heading</h1>
+<h2>
+<a id="user-content-h2-heading" class="anchor" href="#h2-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h2 Heading</h2>
+<h3>
+<a id="user-content-h3-heading" class="anchor" href="#h3-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h3 Heading</h3>
+<h4>
+<a id="user-content-h4-heading" class="anchor" href="#h4-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h4 Heading</h4>
+<h5>
+<a id="user-content-h5-heading" class="anchor" href="#h5-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h5 Heading</h5>
+<h6>
+<a id="user-content-h6-heading" class="anchor" href="#h6-heading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>h6 Heading</h6>
+</blockquote>
+<hr>
+<h2>
+<a id="user-content-emphasis" class="anchor" href="#emphasis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Emphasis</h2>
+<pre><code>  **This is bold text** 
+
+  __This is bold text__
+
+  *This is italic text*
+
+  _This is italic text_
+
+  ~~Strikethrough~~
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<p><strong>This is bold text</strong></p>
+<p><strong>This is bold text</strong></p>
+<p><em>This is italic text</em></p>
+<p><em>This is italic text</em></p>
+<p><del>Strikethrough</del></p>
+</blockquote>
+<hr>
+<h2>
+<a id="user-content-lists" class="anchor" href="#lists" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lists</h2>
+<h4>
+<a id="user-content-unordered" class="anchor" href="#unordered" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Unordered</h4>
+<pre><code>+ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<ul>
+<li>Create a list by starting a line with <code>+</code>, <code>-</code>, or <code>*</code>
+</li>
+<li>Sub-lists are made by indenting 2 spaces:
+<ul>
+<li>Marker character change forces new list start:
+<ul>
+<li>Ac tristique libero volutpat at</li>
+</ul>
+<ul>
+<li>Facilisis in pretium nisl aliquet</li>
+</ul>
+<ul>
+<li>Nulla volutpat aliquam velit</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Very easy!</li>
+</ul>
+</blockquote>
+<hr>
+<h4>
+<a id="user-content-ordered" class="anchor" href="#ordered" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ordered</h4>
+<pre><code>1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<ol>
+<li>
+<p>Lorem ipsum dolor sit amet</p>
+</li>
+<li>
+<p>Consectetur adipiscing elit</p>
+</li>
+<li>
+<p>Integer molestie lorem at massa</p>
+</li>
+<li>
+<p>You can use sequential numbers...</p>
+</li>
+<li>
+<p>...or keep all the numbers as <code>1.</code></p>
+</li>
+</ol>
+<p>Start numbering with offset:</p>
+<ol start="57">
+<li>foo</li>
+<li>bar</li>
+</ol>
+</blockquote>
+<hr>
+<h2>
+<a id="user-content-code" class="anchor" href="#code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h2>
+<pre><code>Inline `code`
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<p>Inline <code>code</code></p>
+</blockquote>
+<hr>
+<h4>
+<a id="user-content-indented-code" class="anchor" href="#indented-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Indented code</h4>
+<pre><code>  ```
+  // Some comments
+  IF (TRUE)
+  {
+    // Code
+  }
+ ```
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<pre><code>  // Some comments
+  IF (TRUE)
+  {
+    // Code
+  }
+</code></pre>
+</blockquote>
+<hr>
+<h4>
+<a id="user-content-syntax-highlighting" class="anchor" href="#syntax-highlighting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Syntax highlighting</h4>
+<pre><code>``` js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+```
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-en">foo</span> <span class="pl-c1">=</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">bar</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-k">return</span> <span class="pl-s1">bar</span><span class="pl-c1">++</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span>
+
+<span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-en">foo</span><span class="pl-kos">(</span><span class="pl-c1">5</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+</blockquote>
+<h4>
+<a id="user-content-tables" class="anchor" href="#tables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tables</h4>
+<pre><code>| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>path to data files to supply the data that will be passed into templates.</td>
+</tr>
+<tr>
+<td>engine</td>
+<td>engine to be used for processing templates. Handlebars is the default.</td>
+</tr>
+<tr>
+<td>ext</td>
+<td>extension to be used for dest files.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>Right aligned columns</p>
+<pre><code>| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="right">Option</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">data</td>
+<td align="right">path to data files to supply the data that will be passed into templates.</td>
+</tr>
+<tr>
+<td align="right">engine</td>
+<td align="right">engine to be used for processing templates. Handlebars is the default.</td>
+</tr>
+<tr>
+<td align="right">ext</td>
+<td align="right">extension to be used for dest files.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h4>
+<a id="user-content-links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h4>
+<pre><code>[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+</code></pre>
+<p>Output :</p>
+<blockquote>
+<p><a href="http://dev.nodeca.com" rel="nofollow">link text</a></p>
+<p><a href="http://nodeca.github.io/pica/demo/" title="title text!" rel="nofollow">link with title</a></p>
+</blockquote>
+<h4>
+<a id="user-content-emojies" class="anchor" href="#emojies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Emojies</h4>
+<pre><code>Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
+
+Shortcuts (emoticons): :-) :-( 8-) ;)
+</code></pre>
+<blockquote>
+<p>Classic markup: <g-emoji class="g-emoji" alias="wink" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png">😉</g-emoji> :crush: <g-emoji class="g-emoji" alias="cry" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png">😢</g-emoji> :tear: <g-emoji class="g-emoji" alias="laughing" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png">😆</g-emoji> <g-emoji class="g-emoji" alias="yum" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png">😋</g-emoji></p>
+<p>Shortcuts (emoticons): :-) :-( 8-) ;)</p>
+</blockquote>
+</div>
                 </div>
             </div>
         </div>
