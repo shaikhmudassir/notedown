@@ -42,7 +42,10 @@ def index(request):
     # Note: It will execute only one time while user install the app first time
     reponame = "notedown-" + username
     try:
-        repo = g.get_repo(username + "/" + reponame)
+        # repo = g.get_repo(username + "/" + reponame)
+        repos = g.get_repos()
+        for repo in user.get_repos():
+            if repo.name == reponame
     except:
         user.create_repo(reponame,private=True)
         repo = g.get_repo(username + "/" + reponame)
