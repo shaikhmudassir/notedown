@@ -40,22 +40,24 @@ def index(request):
 
     # If repository is not available (means repo is not created yet) then create new repository
     # Note: It will execute only one time while user install the app first time
+
     reponame = "notedown-" + username
-    try:
-        # repo = g.get_repo(username + "/" + reponame)
-        repos = g.get_repos()
-        for repo in user.get_repos():
-            if repo.name == reponame
-    except:
+    is_repo_exist = False
+    for repo in user.get_repos():
+        if repo.name == reponame:
+            is_repo_exist = True
+   
+    if(not is_repo_exist):
+        print("Repo is not exsit")
         user.create_repo(reponame,private=True)
-        repo = g.get_repo(username + "/" + reponame)
+    repo = g.get_repo(username + "/" + reponame)
         
-        module_dir = os.path.dirname(__file__) 
-        file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
-        with open(file_path) as f:
-            docs = f.read()
-            print(docs)
-            repo.create_file("000docs.md", "Documentation is created", docs)
+    module_dir = os.path.dirname(__file__) 
+    file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
+    with open(file_path) as f:
+        docs = f.read()
+        print(docs)
+        repo.create_file("000docs.md", "Documentation is created", docs)
 
     request.session["user_repo_name"] = username + "/" + reponame
 
