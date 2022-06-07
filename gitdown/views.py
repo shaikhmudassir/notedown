@@ -81,7 +81,7 @@ def index(request):
 
 def oauth(request):
     # Redirect to github authentication
-    return HttpResponseRedirect("https://github.com/login/oauth/authorize?client_id=c083485120a23528eb68") # Iv1.36ee32ab30bbb309
+    return HttpResponseRedirect("https://github.com/login/oauth/authorize?client_id=Iv1.36ee32ab30bbb309")
 
 def callback(request):
     # When user get authorize then he/she will be redirect to this route
@@ -89,8 +89,8 @@ def callback(request):
     code = request.GET.get("code")
     url = 'https://github.com/login/oauth/access_token'
     param = {
-        "client_id": "c083485120a23528eb68",  # Iv1.36ee32ab30bbb309
-        "client_secret":"88ab3d9591291d5e475f8a14220ae5a19c81e70e",  # a949a96806ac6edd6a97d1e6dc00130fef6f13ac
+        "client_id":"Iv1.36ee32ab30bbb309",
+        "client_secret":"a949a96806ac6edd6a97d1e6dc00130fef6f13ac",
         "code":code
     }
     x = requests.post(url, data = param)
