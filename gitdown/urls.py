@@ -4,6 +4,7 @@ from . import views
 app_name = "gitdown"
 urlpatterns = [
     path("", views.index, name="index"),
+    path("home", views.home, name="home"),
     path("oauth", views.oauth, name="oauth"),
     path("callback", views.callback, name="callback"),
     path("new", views.new, name="new"),

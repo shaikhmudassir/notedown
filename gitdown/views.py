@@ -21,6 +21,10 @@ https://docs.github.com/en/developers/apps/managing-github-apps/installing-githu
 https://pygithub.readthedocs.io/en/latest/
 '''
 
+
+def home(request):
+    return render(request, "gitdown/home.html")
+
 def index(request):
     # Check token is available or not.If not then redirect to authentication page
     if "token" not in request.session:
