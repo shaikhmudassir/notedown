@@ -50,15 +50,17 @@ def index(request):
     if(not is_repo_exist):
         print("Repo is not exsit")
         user.create_repo(reponame,private=True)
-    repo = g.get_repo(username + "/" + reponame)
+        repo = g.get_repo(username + "/" + reponame)
         
-    module_dir = os.path.dirname(__file__) 
-    file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
-    with open(file_path) as f:
-        docs = f.read()
-        print(docs)
-        repo.create_file("000docs.md", "Documentation is created", docs)
-
+        module_dir = os.path.dirname(__file__) 
+        file_path = os.path.join(module_dir, 'static/gitdown/docs.md')
+        with open(file_path) as f:
+            docs = f.read()
+            print(docs)
+            repo.create_file("000docs.md", "Documentation is created", docs)
+    else:
+        repo = g.get_repo(username + "/" + reponame)
+        
     request.session["user_repo_name"] = username + "/" + reponame
 
     # Get the files of a repository as a object (This is not just a content of a file it is complete object with all properties)
